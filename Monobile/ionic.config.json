@@ -1,0 +1,7 @@
+{
+  "name": "Monobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
