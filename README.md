@@ -1,6 +1,6 @@
 # Ynov Monobile project 
   
-## IONIC Proeject
+## IONIC Project
   
 ### Presentation  
 Mobile app based on the concept of the famous Monopoly game.
