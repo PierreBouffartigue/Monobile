@@ -6,9 +6,9 @@ import './Home.css';
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+      <IonHeader >
+        <IonToolbar color="primary">
+          <IonTitle>Monobile</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
