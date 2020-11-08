@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonApp, IonIcon, IonButton } from '@ionic/react';
 import React from 'react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import { personOutline } from 'ionicons/icons';
+import {ROUTE_PROFILE} from '../nav/Routes'
 
 const Home: React.FC = () => {
   return (
@@ -10,8 +10,8 @@ const Home: React.FC = () => {
         <IonToolbar color="primary">
           <IonTitle>Monobile</IonTitle>
           <IonButtons slot="end">
-            <IonButton>
-              <IonIcon name="person-outline"></IonIcon>
+            <IonButton href={ROUTE_PROFILE}>
+              <IonIcon icon={personOutline}></IonIcon>
             </IonButton>
           </IonButtons>
         </IonToolbar>
