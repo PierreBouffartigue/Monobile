@@ -1,7 +1,8 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonApp, IonIcon, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonApp, IonIcon, IonButton } from '@ionic/react';
 import React from 'react';
 import { personOutline } from 'ionicons/icons';
-import {ROUTE_PROFILE} from '../nav/Routes'
+import { ROUTE_PROFILE } from '../nav/Routes';
+import { ROUTE_PLATE } from '../nav/Routes'
 
 const Home: React.FC = () => {
   return (
@@ -17,6 +18,12 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+
+
+        <IonButton size="large" expand="block" color="secondary" href={ROUTE_PLATE}>
+          JOUER
+          </IonButton>
+
 
 
       </IonContent>
