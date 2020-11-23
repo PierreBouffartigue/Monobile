@@ -1,143 +1,6 @@
 import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonGrid, IonRow, IonCol} from '@ionic/react';
 import React, { useState } from 'react';
-
-class Plate {
-    public card1: Card = new Card("Test","blue", 2);
-    public player1: Player = new Player("player1");
-    change() {
-        this.card1.state.price = 50;
-    }
-    render() {
-        const fun = (cards: number[]) => {
-            const col = [];
-            for (let i = 0; i < 6; i++) {
-                if (cards[i] !== -1)
-                    col.push(<IonCol>
-                        <IonButton color="primary">{cards[i]}</IonButton>
-                        {(() => {
-                            if (this.player1.pos === cards[i]) {
-                                return <IonText>Player1</IonText>
-                            }
-                        }) ()}
-                    </IonCol>)
-                else
-                    col.push(<IonCol></IonCol>)
-            }
-            return col;
-        }
-        return(
-            <IonGrid>
-                <IonRow>
-                    { (() => {
-                        return fun([0, 1, 2, 3, 4, 5]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([24, -1, -1, -1, -1, 6]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([23, -1, -1, -1, -1, 7]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([22, -1, -1, -1, -1, 8]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([21, -1, -1, -1, -1, 9]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([20, -1, -1, -1, -1, 10]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([19, -1, -1, -1, -1, 11]);
-                    }) ()}
-                </IonRow>
-
-                <IonRow>
-                    { (() => {
-                        return fun([18, 17, 16, 15, 14, 13, 12]);
-                    }) ()}
-                </IonRow>
-            </IonGrid>
-        );
-    }
-}
-
-class Card {
-    public state: { name: string; color: string; price: number };
-
-    constructor(name: string, color: string, price: number) {
-        this.state = {name: name, color: color, price: price};
-    }
-
-    render() {
-        return (
-            <IonButton color="primary">
-                <IonText>{this.state.name}</IonText>
-                {this.state.price === 1000 ? (
-                    <IonText>yes 1000</IonText>
-                ) : (
-                    <IonText>no</IonText>
-                )}
-            </IonButton>
-        );
-    }
-
-    change() {
-        this.state.price = 70
-    }
-}
-
-class Player {
-    public name: string;
-    public pos: number;
-    public money: number;
-    public properties: [];
-
-    constructor(name: string) {
-        this.name = name;
-        this.pos = 0;
-        this.money = 100;
-        this.properties = [];
-    }
-
-    move() {
-        const dice = new Dice();
-        this.pos += dice.roll();
-        if (this.pos > 24) {
-            this.pos -= 25;
-        }
-    }
-}
-
-class Dice {
-    public d1: number = 0;
-    public d2: number = 0;
-    public result: number = 0;
-
-    roll() {
-        const d1 = Math.floor(Math.random() * 6) + 1;
-        const d2 = Math.floor(Math.random() * 6) + 1;
-        this.result = d1 + d2;
-        return d1 + d2;
-    }
-}
+import {Plate} from "../class/Plate";
 
 export const PlayerTest: React.FC = () => {
     const [change, setChange] = useState<boolean>(false)
@@ -145,7 +8,6 @@ export const PlayerTest: React.FC = () => {
     const [dice2, setDice2] = useState<number>()
     const [dices, setDices] = useState<number>()
     const [plate, setPlate] = useState<Plate>(new Plate())
-    const [dice, setDice] = useState<Dice>(new Dice())
 
     const [rollTest, setRollTest] = useState<number>(0)
 
@@ -229,14 +91,9 @@ export const PlayerTest: React.FC = () => {
                 {plate.render()}
 
                 <IonButton onClick={() => {
-                    dice.roll();
+                    plate.players[0].move();
                     setChange(!change)
-                }}>Roll {dice.result}</IonButton>
-
-                <IonButton onClick={() => {
-                    plate.player1.move();
-                    setChange(!change)
-                }}>Player1 Roll {plate.player1.pos}</IonButton>
+                }}>Player1 Roll {plate.players[0].pos}</IonButton>
 
             </IonContent>
         </IonPage>
