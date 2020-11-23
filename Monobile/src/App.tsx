@@ -24,6 +24,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { Plate } from "./pages/Plate";
 import { PlayerTest } from "./pages/PlayerTest";
+import { CaseSpe } from "./pages/CaseSpe";
 import { ROUTE_PROFILE } from './nav/Routes';
 import Profiles from './pages/Profiles';
 
@@ -35,6 +36,7 @@ const App: React.FC = () => (
         <Route path={ROUTE_PROFILE} component={Profiles} />
         <Route path="/plate" component={Plate} exact={true} />
         <Route path="/player" component={PlayerTest} exact={true} />
+        <Route path="/casespe" component={CaseSpe} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>

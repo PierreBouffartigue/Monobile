@@ -99,3 +99,5 @@ export const PlayerTest: React.FC = () => {
         </IonPage>
     );
 };
+
+export default PlayerTest;
