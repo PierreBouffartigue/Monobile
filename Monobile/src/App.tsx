@@ -23,7 +23,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { Plate } from "./pages/Plate";
-import { Player } from "./pages/Player";
+import { PlayerTest } from "./pages/PlayerTest";
 import { ROUTE_PROFILE } from './nav/Routes';
 import Profiles from './pages/Profiles';
 
@@ -34,7 +34,7 @@ const App: React.FC = () => (
         <Route path="/home" component={Home} exact={true} />
         <Route path={ROUTE_PROFILE} component={Profiles} />
         <Route path="/plate" component={Plate} exact={true} />
-        <Route path="/player" component={Player} exact={true} />
+        <Route path="/player" component={PlayerTest} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>
