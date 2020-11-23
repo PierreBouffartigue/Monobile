@@ -11,67 +11,67 @@ export const Plate: React.FC = () => (
         <IonContent className="padding" color="new">
             <IonGrid>
                 <IonRow className="ion-align-items-start">
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 7</IonCol>
+                    <IonCol>case 8</IonCol>
+                    <IonCol>case 9</IonCol>
+                    <IonCol>case 10</IonCol>
+                    <IonCol>case 11</IonCol>
+                    <IonCol>case 12</IonCol>
+                    <IonCol>case 13</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case</IonCol>
+                    <IonCol>case 6</IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 14</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case</IonCol>
+                    <IonCol>case 5</IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 15</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case</IonCol>
+                    <IonCol>case 4</IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 16</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case</IonCol>
+                    <IonCol>case 3</IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 17</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case</IonCol>
+                    <IonCol>case 2</IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 18</IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-end">
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
-                    <IonCol>case</IonCol>
+                    <IonCol>case 1</IonCol>
+                    <IonCol>case 24</IonCol>
+                    <IonCol>case 23</IonCol>
+                    <IonCol>case 22</IonCol>
+                    <IonCol>case 21</IonCol>
+                    <IonCol>case 20</IonCol>
+                    <IonCol>case 19</IonCol>
                 </IonRow>
             </IonGrid>
         </IonContent>
