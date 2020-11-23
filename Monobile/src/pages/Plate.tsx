@@ -11,67 +11,67 @@ export const Plate: React.FC = () => (
         <IonContent className="padding" color="new">
             <IonGrid>
                 <IonRow className="ion-align-items-start">
-                    <IonCol>case 7</IonCol>
-                    <IonCol>case 8</IonCol>
-                    <IonCol>case 9</IonCol>
-                    <IonCol>case 10</IonCol>
-                    <IonCol>case 11</IonCol>
-                    <IonCol>case 12</IonCol>
-                    <IonCol>case 13</IonCol>
+                    <IonCol><button id="case_7" className="case_7"><img src="changetoplateimg.png" alt="7"/></button></IonCol>
+                    <IonCol><button id="case_8" className="case_8"><img src="changetoplateimg.png" alt="8"/></button></IonCol>
+                    <IonCol><button id="case_9" className="case_9"><img src="changetoplateimg.png" alt="9"/></button></IonCol>
+                    <IonCol><button id="case_10" className="case_10"><img src="changetoplateimg.png" alt="10"/></button></IonCol>
+                    <IonCol><button id="case_11" className="case_11"><img src="changetoplateimg.png" alt="11"/></button></IonCol>
+                    <IonCol><button id="case_12" className="case_12"><img src="changetoplateimg.png" alt="12"/></button></IonCol>
+                    <IonCol><button id="case_13" className="case_13"><img src="changetoplateimg.png" alt="13"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case 6</IonCol>
+                    <IonCol><button id="case_6" className="case_6"><img src="changetoplateimg.png" alt="6"/></button></IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case 14</IonCol>
+                    <IonCol><button id="case_14" className="case_14"><img src="changetoplateimg.png" alt="14"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case 5</IonCol>
+                    <IonCol><button id="case_5" className="case_5"><img src="changetoplateimg.png" alt="5"/></button></IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case 15</IonCol>
+                    <IonCol><button id="case_15" className="case_15"><img src="changetoplateimg.png" alt="15"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case 4</IonCol>
+                    <IonCol><button id="case_4" className="case_4"><img src="changetoplateimg.png" alt="4"/></button></IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case 16</IonCol>
+                    <IonCol><button id="case_16" className="case_16"><img src="changetoplateimg.png" alt="16"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case 3</IonCol>
+                    <IonCol><button id="case_3" className="case_3"><img src="changetoplateimg.png" alt="3"/></button></IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case 17</IonCol>
+                    <IonCol><button id="case_17" className="case_17"><img src="changetoplateimg.png" alt="17"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-center">
-                    <IonCol>case 2</IonCol>
+                    <IonCol><button id="case_2" className="case_2"><img src="changetoplateimg.png" alt="2"/></button></IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
                     <IonCol> </IonCol>
-                    <IonCol>case 18</IonCol>
+                    <IonCol><button id="case_18" className="case_18"><img src="changetoplateimg.png" alt="18"/></button></IonCol>
                 </IonRow>
                 <IonRow className="ion-align-items-end">
-                    <IonCol>case 1</IonCol>
-                    <IonCol>case 24</IonCol>
-                    <IonCol>case 23</IonCol>
-                    <IonCol>case 22</IonCol>
-                    <IonCol>case 21</IonCol>
-                    <IonCol>case 20</IonCol>
-                    <IonCol>case 19</IonCol>
+                    <IonCol><button id="case_1" className="case_1"><img src="changetoplateimg.png" alt="1"/></button></IonCol>
+                    <IonCol><button id="case_24" className="case_24"><img src="changetoplateimg.png" alt="24"/></button></IonCol>
+                    <IonCol><button id="case_23" className="case_23"><img src="changetoplateimg.png" alt="23"/></button></IonCol>
+                    <IonCol><button id="case_22" className="case_22"><img src="changetoplateimg.png" alt="22"/></button></IonCol>
+                    <IonCol><button id="case_21" className="case_21"><img src="changetoplateimg.png" alt="21"/></button></IonCol>
+                    <IonCol><button id="case_20" className="case_20"><img src="changetoplateimg.png" alt="20"/></button></IonCol>
+                    <IonCol><button id="case_19" className="case_19"><img src="changetoplateimg.png" alt="19"/></button></IonCol>
                 </IonRow>
             </IonGrid>
         </IonContent>
