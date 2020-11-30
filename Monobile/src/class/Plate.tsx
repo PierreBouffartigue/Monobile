@@ -7,8 +7,7 @@ export class Plate {
     public cards: Card[] = [new Card(1, "case1", "red",10, null),
         new Card(2, "case2", "red",10, null),
     ];
-
-    public players: Player[] = [new Player("player1"), new Player("player2"), new Player("player3"), new Player("player4")]
+    public players: Player[] = [new Player("player1", false), new Player("player2", false), new Player("player3",false), new Player("player4",false)]
     public playerTurn = 0;
 
     jail(){

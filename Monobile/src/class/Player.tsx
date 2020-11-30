@@ -6,12 +6,14 @@ export class Player {
     public pos: number;
     public money: number;
     public properties: Card[];
+    public isJailed: boolean;
 
-    constructor(name: string) {
+    constructor(name: string, isJailed: boolean) {
         this.name = name;
         this.pos = 1;
         this.money = 100;
         this.properties = [];
+        this.isJailed = isJailed;
     }
 
     move() {

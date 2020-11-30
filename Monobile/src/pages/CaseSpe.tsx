@@ -4,7 +4,7 @@ import {Player} from "../class/Player";
 import {Plate} from "../class/Plate";
 
 export const CaseSpe: React.FC = () => {
-    const [player, setPlayer] = useState<Player>(new Player("player2"))
+    const [player, setPlayer] = useState<Player>(new Player("player2",false))
     const [test, setTest] = useState<Plate>(new Plate()) 
     const [change, setChange] = useState<boolean>(false)
 
