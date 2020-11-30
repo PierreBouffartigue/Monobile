@@ -1,6 +1,8 @@
 import {Dice} from "./Dice";
 import {Card} from "./Card";
 import {Plate} from "./Plate";
+import React from "react";
+import { IonButton, IonGrid, IonLabel, IonRow } from "@ionic/react";
 
 export class Player {
     public name: string;
@@ -8,6 +10,7 @@ export class Player {
     public money: number;
     public properties: Card[];
     public isJailed: boolean;
+    public turnJailed: number;
 
     constructor(name: string, isJailed: boolean) {
         this.name = name;
@@ -15,6 +18,7 @@ export class Player {
         this.money = 100;
         this.properties = [];
         this.isJailed = isJailed;
+        this.turnJailed = 0;
     }
 
     jail(player: Player) {
@@ -29,14 +33,23 @@ export class Player {
 
     move(player: Player, plate: Plate) {
         const dice = new Dice();
-        if (dice.rollPrison()) {
+        if (player.isJailed) {
+            console.log("coucou")
+        } else {
             this.pos += dice.roll();
             if (this.pos > 24) {
                 this.pos -= 24;
             }
-        } else {
-            plate.nextPlayer()
+            this.jail(player)
         }
+        // if (dice.rollPrison()) {
+        //     this.pos += dice.roll();
+        //     if (this.pos > 24) {
+        //         this.pos -= 24;
+        //     }
+        // } else {
+        //     plate.nextPlayer()
+        // }
         
     }
 
@@ -61,5 +74,15 @@ export class Player {
         if (this.money < 0) {
             this.money = 0;
         }
+    }
+
+    renderChoice() {
+        return(
+            <IonGrid>
+                <IonButton color="primary">
+                    test
+                </IonButton>
+            </IonGrid>
+        );
     }
 }
