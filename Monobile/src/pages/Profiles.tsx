@@ -15,6 +15,19 @@ const Profiles: React.FC = () => {
     appCtx.updateProfile(updatedProfile);
   }
 
+  const win = () => {
+    let profileWinner = { ...appCtx.profile }
+    profileWinner.win += 1
+    profileWinner.game += 1
+    appCtx.updateProfile(profileWinner)
+  }
+
+  const lose = () => {
+    let profileLoser = { ...appCtx.profile }
+    profileLoser.game += 1
+    appCtx.updateProfile(profileLoser)
+  }
+
 
 
   return (
@@ -23,10 +36,20 @@ const Profiles: React.FC = () => {
         <IonGrid className="ion-no-padding">
           <IonRow id="headerRow" className="ion-justify-content-around ion-align-items-center">
 
-            <IonCol size="12" className="ion-text-center ion-padding-bottom">USERNAME</IonCol>
+            <IonCol size="12" onClick={() => setShowAlert(true)} className="ion-text-center ion-padding-bottom">{appCtx.profile.username}</IonCol>
           </IonRow>
-
+          <IonRow>
+            <IonCol>
+              {appCtx.profile.win}
+            </IonCol>
+            <IonCol>
+              {appCtx.profile.game}
+            </IonCol>
+          </IonRow>
+          <IonButton onClick={win}>VICTOIRE</IonButton>
+          <IonButton onClick={lose}>DEFAITE</IonButton>
         </IonGrid>
+
       </IonContent>
       <IonAlert
         isOpen={showAlert}
@@ -55,7 +78,7 @@ const Profiles: React.FC = () => {
           }
         ]}
       />
-    
+
     </IonApp>
   );
 };

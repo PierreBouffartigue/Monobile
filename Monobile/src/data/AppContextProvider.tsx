@@ -18,13 +18,21 @@ const AppContextProvider: React.FC = (props) => {
         setProfile(updateProfile)
     }
 
+    const win = (newWin: Profile) => {
+        setProfile(newWin)
+    }
+
+    const lose = (newLose: Profile) => {
+        setProfile(newLose)
+    }
+
     const initContext = async () => {
         const profileData = await Storage.get({key: 'profile'})
         const storedProfile = profileData.value? JSON.parse(profileData.value): defaultProfile
         setProfile(storedProfile)
     }
 
-    return <AppContext.Provider value={{ initContext, profile, updateProfile}}>
+    return <AppContext.Provider value={{ initContext, profile, updateProfile, win, lose}}>
         {props.children}
     </AppContext.Provider>
 }
