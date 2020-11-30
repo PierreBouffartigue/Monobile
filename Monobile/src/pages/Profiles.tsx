@@ -32,22 +32,43 @@ const Profiles: React.FC = () => {
 
   return (
     <IonApp id="Profile">
+      
       <IonContent>
         <IonGrid className="ion-no-padding">
           <IonRow id="headerRow" className="ion-justify-content-around ion-align-items-center">
 
             <IonCol size="12" onClick={() => setShowAlert(true)} className="ion-text-center ion-padding-bottom">{appCtx.profile.username}</IonCol>
           </IonRow>
-          <IonRow>
+          <IonRow class="ion-text-center">
+            <IonCol>
+              VICTOIRES
+            </IonCol>
+            <IonCol>
+              DEFAITES
+            </IonCol>
+            <IonCol>
+              TOTAL
+            </IonCol>
+          </IonRow>
+          <IonRow class="ion-text-center">
             <IonCol>
               {appCtx.profile.win}
+            </IonCol>
+            <IonCol>
+              {appCtx.profile.game - appCtx.profile.win}
             </IonCol>
             <IonCol>
               {appCtx.profile.game}
             </IonCol>
           </IonRow>
-          <IonButton onClick={win}>VICTOIRE</IonButton>
-          <IonButton onClick={lose}>DEFAITE</IonButton>
+          <IonRow class="ion-text-center">
+            <IonCol>
+              <IonButton onClick={win}>VICTOIRE</IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton onClick={lose}>DEFAITE</IonButton>
+            </IonCol>
+          </IonRow>
         </IonGrid>
 
       </IonContent>
