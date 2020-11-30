@@ -1,5 +1,6 @@
 import {Dice} from "./Dice";
 import {Card} from "./Card";
+import {Plate} from "./Plate";
 
 export class Player {
     public name: string;
@@ -16,12 +17,27 @@ export class Player {
         this.isJailed = isJailed;
     }
 
-    move() {
-        const dice = new Dice();
-        this.pos += dice.roll();
-        if (this.pos > 24) {
-            this.pos -= 24;
+    jail(player: Player) {
+        if (this.pos == 7) {
+            player.isJailed = true;
         }
+    }
+
+    removeJail(player: Player) {
+
+    }
+
+    move(player: Player, plate: Plate) {
+        const dice = new Dice();
+        if (dice.rollPrison()) {
+            this.pos += dice.roll();
+            if (this.pos > 24) {
+                this.pos -= 24;
+            }
+        } else {
+            plate.nextPlayer()
+        }
+        
     }
 
     buyCard(card: Card) {

@@ -9,4 +9,13 @@ export class Dice {
         this.result = d1 + d2;
         return d1 + d2;
     }
+
+    rollPrison() {
+        const d1 = Math.floor(Math.random() * 6) + 1;
+        const d2 = Math.floor(Math.random() * 6) + 1;
+        if (d1 == d2) {
+            return true;
+        }
+        return false;
+    }
 }

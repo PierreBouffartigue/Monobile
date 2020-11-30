@@ -1,8 +1,10 @@
 import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonGrid, IonRow, IonCol} from '@ionic/react';
 import React, { useState } from 'react';
 import {Plate} from "../class/Plate";
+import {Player} from "../class/Player";
 
 export const PlayerTest: React.FC = () => {
+    const [player, setPlayer] = useState<Player>(new Player("player1",false))
     const [change, setChange] = useState<boolean>(false)
     const [dice1, setDice1] = useState<number>()
     const [dice2, setDice2] = useState<number>()
@@ -91,7 +93,7 @@ export const PlayerTest: React.FC = () => {
                 {plate.render()}
 
                 <IonButton onClick={() => {
-                    plate.players[plate.playerTurn].move();
+                    plate.players[plate.playerTurn].move(player,plate);
                     plate.nextPlayer();
                     setChange(!change)
                 }}>Player1 Roll {plate.players[0].pos}</IonButton>

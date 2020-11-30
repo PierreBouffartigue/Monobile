@@ -10,10 +10,6 @@ export class Plate {
     public players: Player[] = [new Player("player1", false), new Player("player2", false), new Player("player3",false), new Player("player4",false)]
     public playerTurn = 0;
 
-    jail(){
-
-    }
-
     depart(player: Player) {
         player.money += 50
 
