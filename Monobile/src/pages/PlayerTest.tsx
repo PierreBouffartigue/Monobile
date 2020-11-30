@@ -91,7 +91,8 @@ export const PlayerTest: React.FC = () => {
                 {plate.render()}
 
                 <IonButton onClick={() => {
-                    plate.players[0].move();
+                    plate.players[plate.playerTurn].move();
+                    plate.nextPlayer();
                     setChange(!change)
                 }}>Player1 Roll {plate.players[0].pos}</IonButton>
 

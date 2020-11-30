@@ -1,28 +1,24 @@
-import {IonButton, IonText} from "@ionic/react";
 import React from "react";
 import {Player} from "./Player";
 
 export class Card {
-    public state: { name: string; color: string; price: number };
+    /*public state: { name: string; color: string; price: number };
     constructor(name: string, color: string, price: number) {
         this.state = {name: name, color: color, price: price};
-    }
+    }*/
+    public plateId: number;
+    public name: string;
+    public color: string;
+    public price: number;
+    public owner: Player|null;
 
-    render() {
-        return (
-            <IonButton color="primary">
-                <IonText>{this.state.name}</IonText>
-                {this.state.price === 1000 ? (
-                    <IonText>yes 1000</IonText>
-                ) : (
-                    <IonText>no</IonText>
-                )}
-            </IonButton>
-        );
-    }
 
-    change() {
-        this.state.price = 70
+    constructor(plateId: number, name: string, color: string, price: number, owner: Player|null) {
+        this.plateId = plateId;
+        this.name = name;
+        this.color = color;
+        this.price = price;
+        this.owner = owner;
     }
 
     

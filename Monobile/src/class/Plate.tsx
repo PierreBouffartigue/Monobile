@@ -4,11 +4,12 @@ import {Card} from "./Card";
 import {Player} from "./Player";
 
 export class Plate {
-    public card1: Card = new Card("Test","blue", 2);
-    public cards: Card[] = [new Card("Test","blue", 2), new Card("Test","blue", 2)];
-    public player1: Player = new Player("player1");
+    public cards: Card[] = [new Card(1, "case1", "red",10, null),
+        new Card(2, "case2", "red",10, null),
+    ];
+
     public players: Player[] = [new Player("player1"), new Player("player2"), new Player("player3"), new Player("player4")]
-    public playerTurn = this.players[0];
+    public playerTurn = 0;
 
     jail(){
 
@@ -18,20 +19,32 @@ export class Plate {
         player.money += 50
 
     }
-    change() {
-        this.card1.state.price = 50;
+
+    nextPlayer() {
+        this.playerTurn++
+        if (this.playerTurn > this.players.length - 1) {
+            this.playerTurn = 0;
+        }
     }
     render() {
-        const fun = (cards: number[]) => {
+        const fun = (cases: number[]) => {
             const col = [];
-            for (let i = 0; i < cards.length; i++) {
-                if (cards[i] !== -1)
+            for (let i = 0; i < cases.length; i++) {
+                if (cases[i] !== -1)
                     col.push(<IonCol>
-                        <IonButton color="primary">{cards[i]}</IonButton>
-                        {(() => {
-                            if (this.players[0].pos === cards[i]) {
-                                return <IonText>Player1</IonText>
+                        <IonButton color="primary" onClick={() => {}}>{cases[i]} {(() => {
+                            if (this.cards[cases[i]-1]) {
+                                return this.cards[cases[i]-1].name
                             }
+                        }) ()}</IonButton>
+                        {(() => {
+                            const playerPos = []
+                            for (let l = 0; l < this.players.length; l++) {
+                                if (this.players[l].pos === cases[i]) {
+                                    playerPos.push(<div><IonText>Player{l + 1}</IonText></div>);
+                                }
+                            }
+                            return playerPos;;
                         }) ()}
                     </IonCol>)
                 else
