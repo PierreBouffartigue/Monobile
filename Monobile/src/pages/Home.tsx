@@ -1,4 +1,4 @@
-import {IonApp, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar} from '@ionic/react';
+import {IonApp, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar, IonBackButton} from '@ionic/react';
 import React from 'react';
 import {personOutline} from 'ionicons/icons';
 import {ROUTE_PLATE, ROUTE_PROFILE} from '../nav/Routes';

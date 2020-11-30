@@ -1,18 +1,25 @@
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonAlert, IonBackButton, IonApp, IonButton, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonItem, } from '@ionic/react';
+import { IonContent, IonHeader, IonCard,IonIcon, IonCardContent, IonCardHeader, IonCardTitle, IonTitle, IonToolbar, IonButtons, IonAlert, IonLabel, IonBackButton, IonApp, IonButton, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonItem, } from '@ionic/react';
 import React, { useState, useEffect, useContext } from 'react';
 import { ROUTE_HOME } from '../nav/Routes'
 import { Plugins, App } from '@capacitor/core'
+import {pencilOutline, text} from 'ionicons/icons';
 import AppContext from '../data/app-context';
 
 const Profiles: React.FC = () => {
 
   const [showAlert, setShowAlert] = useState(false);
+  const [showError, setShowError] = useState(false)
   const appCtx = useContext(AppContext)
 
   const updateUsername = (newUsername: string) => {
-    let updatedProfile = { ...appCtx.profile }
+    if (newUsername.length <= 20){
+      let updatedProfile = { ...appCtx.profile }
     updatedProfile.username = newUsername;
     appCtx.updateProfile(updatedProfile);
+    }
+    else{
+      setShowError(true)
+    }
   }
 
   const win = () => {
@@ -32,46 +39,78 @@ const Profiles: React.FC = () => {
 
   return (
     <IonApp id="Profile">
-      
-      <IonContent>
-        <IonGrid className="ion-no-padding">
-          <IonRow id="headerRow" className="ion-justify-content-around ion-align-items-center">
 
-            <IonCol size="12" onClick={() => setShowAlert(true)} className="ion-text-center ion-padding-bottom">{appCtx.profile.username}</IonCol>
-          </IonRow>
-          <IonRow class="ion-text-center">
-            <IonCol>
-              VICTOIRES
-            </IonCol>
-            <IonCol>
-              DEFAITES
-            </IonCol>
-            <IonCol>
-              TOTAL
-            </IonCol>
-          </IonRow>
-          <IonRow class="ion-text-center">
-            <IonCol>
-              {appCtx.profile.win}
-            </IonCol>
-            <IonCol>
-              {appCtx.profile.game - appCtx.profile.win}
-            </IonCol>
-            <IonCol>
-              {appCtx.profile.game}
-            </IonCol>
-          </IonRow>
-          <IonRow class="ion-text-center">
-            <IonCol>
-              <IonButton onClick={win}>VICTOIRE</IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton onClick={lose}>DEFAITE</IonButton>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+      <IonHeader>
+
+        <IonToolbar color="primary">
+          <IonButtons slot="start">
+            <IonBackButton defaultHref={(ROUTE_HOME)} />
+          </IonButtons>
+          <IonTitle>Monobile</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <IonCard>
+          <IonCardHeader class="ion-text-center">
+            <IonCardTitle onClick={() => setShowAlert(true)}>{appCtx.profile.username} <IonIcon icon={pencilOutline}></IonIcon></IonCardTitle>
+            
+          </IonCardHeader>
+
+          <IonCardContent>
+            <IonGrid className="">
+
+              <IonRow class="ion-text-center">
+                <IonCol>
+                  VICTOIRES
+              </IonCol>
+                <IonCol>
+                  DEFAITES
+              </IonCol>
+                <IonCol>
+                  TOTAL
+              </IonCol>
+              </IonRow>
+              <IonRow class="ion-text-center">
+                <IonCol>
+                  {appCtx.profile.win}
+                </IonCol>
+                <IonCol>
+                  {appCtx.profile.game - appCtx.profile.win}
+                </IonCol>
+                <IonCol>
+                  {appCtx.profile.game}
+                </IonCol>
+              </IonRow>
+              <IonRow class="ion-text-center">
+                <IonCol>
+                  <IonButton onClick={win}>VICTOIRE</IonButton>
+                </IonCol>
+                <IonCol>
+                  <IonButton onClick={lose}>DEFAITE</IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </IonCardContent>
+        </IonCard>
+
 
       </IonContent>
+      <IonAlert
+      isOpen={showError}
+      onDidDismiss={() => setShowError(false)}
+      header={'Trop long'}
+      buttons={[
+        {
+          text: 'OK',
+          role: 'OK',
+          handler: () => {
+            setShowAlert(true)
+          }
+        }
+      ]}
+      />
+
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
