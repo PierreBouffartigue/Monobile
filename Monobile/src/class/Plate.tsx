@@ -9,6 +9,15 @@ export class Plate {
     public player1: Player = new Player("player1");
     public players: Player[] = [new Player("player1"), new Player("player2"), new Player("player3"), new Player("player4")]
     public playerTurn = this.players[0];
+
+    jail(){
+
+    }
+
+    depart(player: Player) {
+        player.money += 50
+
+    }
     change() {
         this.card1.state.price = 50;
     }

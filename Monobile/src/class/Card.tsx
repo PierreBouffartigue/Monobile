@@ -1,9 +1,9 @@
 import {IonButton, IonText} from "@ionic/react";
 import React from "react";
+import {Player} from "./Player";
 
 export class Card {
     public state: { name: string; color: string; price: number };
-
     constructor(name: string, color: string, price: number) {
         this.state = {name: name, color: color, price: price};
     }
@@ -24,4 +24,6 @@ export class Card {
     change() {
         this.state.price = 70
     }
+
+    
 }

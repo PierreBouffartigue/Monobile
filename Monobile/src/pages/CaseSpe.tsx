@@ -1,26 +1,11 @@
 import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonGrid, IonRow, IonCol, IonLabel} from '@ionic/react';
 import React, { useState } from 'react';
-
-class Player {
-    public name: string;
-    public pos: number;
-    public money: number;
-    public properties: [];
-
-    constructor(name: string) {
-        this.name = name;
-        this.pos = 0;
-        this.money = 100;
-        this.properties = [];
-    }
-    
-    depart() {
-        this.money += 50
-    }
-}
+import {Player} from "../class/Player";
+import {Plate} from "../class/Plate";
 
 export const CaseSpe: React.FC = () => {
     const [player, setPlayer] = useState<Player>(new Player("player2"))
+    const [test, setTest] = useState<Plate>(new Plate()) 
     const [change, setChange] = useState<boolean>(false)
 
     return (
@@ -33,10 +18,10 @@ export const CaseSpe: React.FC = () => {
             <IonContent fullscreen>
                 <IonGrid>
                     <IonButton onClick={() => {
-                    player.depart();
-                    setChange(!change)
+                        test?.depart(player);
+                        setChange(!change)
                     }}>testFunc</IonButton>
-                    <IonLabel>{player.money+50}</IonLabel>
+                    <IonLabel>{player.money}</IonLabel>
                 </IonGrid>
             </IonContent>
         </IonPage>
