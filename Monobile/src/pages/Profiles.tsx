@@ -1,24 +1,29 @@
-import { IonContent, IonHeader, IonCard,IonIcon, IonCardContent, IonCardHeader, IonCardTitle, IonTitle, IonToolbar, IonButtons, IonAlert, IonLabel, IonBackButton, IonApp, IonButton, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonItem, } from '@ionic/react';
-import React, { useState, useEffect, useContext } from 'react';
+import { IonContent, IonHeader, IonCard, IonIcon, IonCardContent, IonCardHeader, IonCardTitle, IonTitle, IonToolbar, IonButtons, IonAlert, IonBackButton, IonApp, IonGrid, IonRow, IonCol, } from '@ionic/react';
+import React, { useState, useContext } from 'react';
 import { ROUTE_HOME } from '../nav/Routes'
-import { Plugins, App } from '@capacitor/core'
-import {pencilOutline, text} from 'ionicons/icons';
+import { pencilOutline} from 'ionicons/icons';
 import AppContext from '../data/app-context';
+import '../theme/Profile.css'
+import '../theme/variables.css'
 
 const Profiles: React.FC = () => {
 
   const [showAlert, setShowAlert] = useState(false);
-  const [showError, setShowError] = useState(false)
+  const [showErrorLong, setShowErrorLong] = useState(false)
+  const [showErrorEmpty, setShowErrorEmpty] = useState(false)
   const appCtx = useContext(AppContext)
 
   const updateUsername = (newUsername: string) => {
-    if (newUsername.length <= 20){
+    if (newUsername.length <= 20 && newUsername.length > 0 ) {
       let updatedProfile = { ...appCtx.profile }
-    updatedProfile.username = newUsername;
-    appCtx.updateProfile(updatedProfile);
+      updatedProfile.username = newUsername;
+      appCtx.updateProfile(updatedProfile);
     }
-    else{
-      setShowError(true)
+    else if(newUsername.length == 0){
+      setShowErrorEmpty(true)
+    }
+    else {
+      setShowErrorLong(true)
     }
   }
 
@@ -40,7 +45,7 @@ const Profiles: React.FC = () => {
   return (
     <IonApp id="Profile">
 
-      <IonHeader>
+      <IonHeader class="Responsive-header">
 
         <IonToolbar color="primary">
           <IonButtons slot="start">
@@ -51,67 +56,65 @@ const Profiles: React.FC = () => {
       </IonHeader>
 
       <IonContent>
-        <IonCard>
-          <IonCardHeader class="ion-text-center">
-            <IonCardTitle onClick={() => setShowAlert(true)}>{appCtx.profile.username} <IonIcon icon={pencilOutline}></IonIcon></IonCardTitle>
-            
+
+        <IonCard  style={{position:'flex', top: "25%"}}>
+          <IonCardHeader class="ion-text-center Responsive-card">
+            <IonCardTitle class="Responsive-username" onClick={() => setShowAlert(true)}>{appCtx.profile.username} <IonIcon icon={pencilOutline}></IonIcon></IonCardTitle>
+
           </IonCardHeader>
 
-          <IonCardContent>
-            <IonGrid className="">
+          <IonCardContent >
+            <IonGrid >
 
-              <IonRow class="ion-text-center">
-                <IonCol>
-                  VICTOIRES
-              </IonCol>
-                <IonCol>
-                  DEFAITES
-              </IonCol>
-                <IonCol>
-                  TOTAL
-              </IonCol>
+              <IonCol class="ion-text-center Responsive-stat">
+                <IonRow>
+                  VICTOIRES {appCtx.profile.win}
               </IonRow>
-              <IonRow class="ion-text-center">
-                <IonCol>
-                  {appCtx.profile.win}
-                </IonCol>
-                <IonCol>
-                  {appCtx.profile.game - appCtx.profile.win}
-                </IonCol>
-                <IonCol>
-                  {appCtx.profile.game}
-                </IonCol>
+                <IonRow>
+                  DEFAITES {appCtx.profile.game - appCtx.profile.win}
               </IonRow>
-              <IonRow class="ion-text-center">
-                <IonCol>
-                  <IonButton onClick={win}>VICTOIRE</IonButton>
-                </IonCol>
-                <IonCol>
-                  <IonButton onClick={lose}>DEFAITE</IonButton>
-                </IonCol>
+                <IonRow>
+                  TOTAL {appCtx.profile.game}
               </IonRow>
+              </IonCol>
             </IonGrid>
           </IonCardContent>
         </IonCard>
 
 
+
       </IonContent>
       <IonAlert
-      isOpen={showError}
-      onDidDismiss={() => setShowError(false)}
-      header={'Trop long'}
-      buttons={[
-        {
-          text: 'OK',
-          role: 'OK',
-          handler: () => {
-            setShowAlert(true)
+        isOpen={showErrorLong}
+        onDidDismiss={() => setShowErrorLong(false)}
+        header={'Trop long'}
+        buttons={[
+          {
+            text: 'OK',
+            role: 'OK',
+            handler: () => {
+              setShowAlert(true)
+            }
           }
-        }
-      ]}
+        ]}
+      />
+      <IonAlert 
+      
+        isOpen={showErrorEmpty}
+        onDidDismiss={() => setShowErrorEmpty(false)}
+        header={'Username Vide'}
+        buttons={[
+          {
+            text: 'OK',
+            role: 'OK',
+            handler: () => {
+              setShowAlert(true)
+            }
+          }
+        ]}
       />
 
-      <IonAlert
+      <IonAlert 
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
         header={'Username'}
