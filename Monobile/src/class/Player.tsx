@@ -2,7 +2,8 @@ import {Dice} from "./Dice";
 import {Card} from "./Card";
 import {Plate} from "./Plate";
 import React from "react";
-import { IonButton, IonGrid, IonLabel, IonRow } from "@ionic/react";
+import { IonButton, IonContent, IonGrid, IonLabel, IonRow } from "@ionic/react";
+import { render } from "@testing-library/react";
 
 export class Player {
     public name: string;
@@ -27,6 +28,19 @@ export class Player {
         }
     }
 
+    worldTour(player: Player) {
+        if (player.pos == 19) {
+            console.log("coucou")
+            return(
+                <IonContent>
+                    <IonButton>
+                        testing
+                    </IonButton>
+                </IonContent>
+            )
+        }
+    }
+
     removeJail(player: Player) {
         const dice = new Dice();
         if (dice.rollPrison()) {
@@ -39,17 +53,15 @@ export class Player {
 
     move(player: Player, plate: Plate) {
         const dice = new Dice();
-        if (player.isJailed) {
-            console.log("coucou")
-        } else {
-            player.pos += dice.roll();
-            if (player.pos > 24) {
-                plate.depart(player);
-                player.pos -= 24;
-            }
-            console.log(player.pos)
-            player.jail(player)
+        player.pos += dice.roll();
+        if (player.pos > 24) {
+            plate.depart(player);
+            player.pos -= 24;
         }
+        console.log(player.pos)
+        player.jail(player)
+        player.worldTour(player)
+        
         // if (dice.rollPrison()) {
         //     this.pos += dice.roll();
         //     if (this.pos > 24) {
@@ -82,15 +94,5 @@ export class Player {
         if (this.money < 0) {
             this.money = 0;
         }
-    }
-
-    renderChoice() {
-        return(
-            <IonGrid>
-                <IonButton color="primary">
-                    test
-                </IonButton>
-            </IonGrid>
-        );
     }
 }

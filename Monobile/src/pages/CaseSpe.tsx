@@ -9,6 +9,7 @@ export const CaseSpe: React.FC = () => {
     const [plate, setTest] = useState<Plate>(new Plate()) 
     const [change, setChange] = useState<boolean>(false)
     const [showAlert, setShowAlert] = useState(false);
+    const [showTour, setShowTour] = useState(false);
     
     return (
         <IonPage>
@@ -33,6 +34,9 @@ export const CaseSpe: React.FC = () => {
                             }
                         } else {
                             plate.players[plate.playerTurn].move(player,plate);
+                            if (player.pos == 19) {
+                                setShowTour(true)
+                            }
                             plate.nextPlayer();
                             setChange(!change)
                         }
@@ -78,6 +82,40 @@ export const CaseSpe: React.FC = () => {
                 }
             }
           }
+
+        ]}
+      />
+      <IonAlert
+        isOpen={showTour}
+        onDidDismiss={() => setShowTour(false)}
+        header={'Where do you go ?'}
+        inputs={[
+            {
+              name: 'pos',
+              type: 'number',
+              min: 1,
+              max: 24,
+              placeholder: '19'
+            }
+          ]}
+        buttons={[
+          {
+            text: 'Go',
+            handler: data => {
+                if (parseInt(data.pos) < 19) {
+                    player.money += 50
+                }
+                player.pos = parseInt(data.pos)
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+                player.pos = 19;
+            }
+          }
+          
 
         ]}
       />
