@@ -15,6 +15,26 @@ export class Plate {
 
     }
 
+    jail(player: Player) {
+        if (player.pos == 7) {
+            player.isJailed = true;
+        }
+    }
+
+    getCardPlayer(player:Player) {
+        let res = 0;
+        for (let i = 0; i < player.properties.length; i++) {
+            res++
+        }
+        return res
+    }
+
+    impots(player: Player,plate: Plate) {
+        if (player.pos == 23) {
+            player.money = player.money - (plate.getCardPlayer(player)*20)
+        }
+    }
+
     nextPlayer() {
         this.playerTurn++
         if (this.playerTurn > this.players.length - 1) {

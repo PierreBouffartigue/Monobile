@@ -22,25 +22,6 @@ export class Player {
         this.turnJailed = 0;
     }
 
-    jail(player: Player) {
-        if (player.pos == 7) {
-            player.isJailed = true;
-        }
-    }
-
-    worldTour(player: Player) {
-        if (player.pos == 19) {
-            console.log("coucou")
-            return(
-                <IonContent>
-                    <IonButton>
-                        testing
-                    </IonButton>
-                </IonContent>
-            )
-        }
-    }
-
     removeJail(player: Player) {
         const dice = new Dice();
         if (dice.rollPrison()) {
@@ -51,6 +32,8 @@ export class Player {
         }
     }
 
+    
+
     move(player: Player, plate: Plate) {
         const dice = new Dice();
         player.pos += dice.roll();
@@ -58,18 +41,9 @@ export class Player {
             plate.depart(player);
             player.pos -= 24;
         }
+        plate.impots(player,plate)
         console.log(player.pos)
-        player.jail(player)
-        player.worldTour(player)
-        
-        // if (dice.rollPrison()) {
-        //     this.pos += dice.roll();
-        //     if (this.pos > 24) {
-        //         this.pos -= 24;
-        //     }
-        // } else {
-        //     plate.nextPlayer()
-        // }
+        plate.jail(player)
         
     }
 

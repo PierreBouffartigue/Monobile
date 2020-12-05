@@ -1,6 +1,7 @@
 import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonGrid, IonRow, IonCol, IonLabel, IonModal, IonAlert} from '@ionic/react';
 import React, { useState } from 'react';
 import {Player} from "../class/Player";
+import {Card} from "../class/Card";
 import {Plate} from "../class/Plate";
 import { pricetagsOutline } from 'ionicons/icons';
 
@@ -10,6 +11,7 @@ export const CaseSpe: React.FC = () => {
     const [change, setChange] = useState<boolean>(false)
     const [showAlert, setShowAlert] = useState(false);
     const [showTour, setShowTour] = useState(false);
+    const cardtest = new Card(3,"case3","red",10,null);
     
     return (
         <IonPage>
@@ -41,6 +43,12 @@ export const CaseSpe: React.FC = () => {
                             setChange(!change)
                         }
                 }}>Player1 Roll </IonButton>
+                <IonButton onClick={() => {
+                    player.properties.push(cardtest)
+                    console.log(player.properties)
+                }}>
+                    ajout ville
+                </IonButton>
                 </IonGrid> 
             </IonContent>
             <IonAlert
