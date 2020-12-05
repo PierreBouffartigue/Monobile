@@ -22,13 +22,19 @@ export class Player {
     }
 
     jail(player: Player) {
-        if (this.pos == 7) {
+        if (player.pos == 7) {
             player.isJailed = true;
         }
     }
 
     removeJail(player: Player) {
-
+        const dice = new Dice();
+        if (dice.rollPrison()) {
+            player.isJailed = false;
+            return true
+        } else {
+            return false
+        }
     }
 
     move(player: Player, plate: Plate) {
@@ -36,11 +42,13 @@ export class Player {
         if (player.isJailed) {
             console.log("coucou")
         } else {
-            this.pos += dice.roll();
-            if (this.pos > 24) {
-                this.pos -= 24;
+            player.pos += dice.roll();
+            if (player.pos > 24) {
+                plate.depart(player);
+                player.pos -= 24;
             }
-            this.jail(player)
+            console.log(player.pos)
+            player.jail(player)
         }
         // if (dice.rollPrison()) {
         //     this.pos += dice.roll();
