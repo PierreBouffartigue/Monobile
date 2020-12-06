@@ -1,7 +1,7 @@
-import { IonContent, IonHeader, IonCard, IonIcon, IonCardContent, IonCardHeader, IonCardTitle, IonTitle, IonToolbar, IonButtons, IonAlert, IonBackButton, IonApp, IonGrid, IonRow, IonCol, } from '@ionic/react';
+import { IonContent, IonHeader, IonCard, IonIcon, IonCardContent, IonCardHeader, IonCardTitle, IonTitle, IonToolbar, IonButtons, IonAlert, IonBackButton, IonApp, IonGrid, IonRow, IonCol, IonButton, } from '@ionic/react';
 import React, { useState, useContext } from 'react';
 import { ROUTE_HOME } from '../nav/Routes'
-import { pencilOutline} from 'ionicons/icons';
+import { pencilOutline } from 'ionicons/icons';
 import AppContext from '../data/app-context';
 import '../theme/Profile.css'
 import '../theme/variables.css'
@@ -14,12 +14,12 @@ const Profiles: React.FC = () => {
   const appCtx = useContext(AppContext)
 
   const updateUsername = (newUsername: string) => {
-    if (newUsername.length <= 20 && newUsername.length > 0 ) {
+    if (newUsername.length <= 20 && newUsername.length > 0) {
       let updatedProfile = { ...appCtx.profile }
       updatedProfile.username = newUsername;
       appCtx.updateProfile(updatedProfile);
     }
-    else if(newUsername.length == 0){
+    else if (newUsername.length == 0) {
       setShowErrorEmpty(true)
     }
     else {
@@ -40,6 +40,13 @@ const Profiles: React.FC = () => {
     appCtx.updateProfile(profileLoser)
   }
 
+  const reset = () => {
+    let profileReset = { ...appCtx.profile }
+    profileReset.game = 0
+    profileReset.win = 0
+    appCtx.updateProfile(profileReset)
+  }
+
 
 
   return (
@@ -57,7 +64,7 @@ const Profiles: React.FC = () => {
 
       <IonContent>
 
-        <IonCard  style={{position:'flex', top: "25%"}}>
+        <IonCard style={{ top: "25%" }}>
           <IonCardHeader class="ion-text-center Responsive-card">
             <IonCardTitle class="Responsive-username" onClick={() => setShowAlert(true)}>{appCtx.profile.username} <IonIcon icon={pencilOutline}></IonIcon></IonCardTitle>
 
@@ -69,17 +76,29 @@ const Profiles: React.FC = () => {
               <IonCol class="ion-text-center Responsive-stat">
                 <IonRow>
                   VICTOIRES {appCtx.profile.win}
-              </IonRow>
+                </IonRow>
                 <IonRow>
                   DEFAITES {appCtx.profile.game - appCtx.profile.win}
-              </IonRow>
+                </IonRow>
                 <IonRow>
                   TOTAL {appCtx.profile.game}
-              </IonRow>
+                </IonRow>
               </IonCol>
+
+              <IonRow class="ion-align-items-center">
+                <IonCol>
+                  <IonButton class="" onClick={reset}> reset </IonButton>
+                </IonCol>
+
+              </IonRow>
+
             </IonGrid>
           </IonCardContent>
         </IonCard>
+
+
+
+
 
 
 
@@ -98,8 +117,8 @@ const Profiles: React.FC = () => {
           }
         ]}
       />
-      <IonAlert 
-      
+      <IonAlert
+
         isOpen={showErrorEmpty}
         onDidDismiss={() => setShowErrorEmpty(false)}
         header={'Username Vide'}
@@ -114,7 +133,7 @@ const Profiles: React.FC = () => {
         ]}
       />
 
-      <IonAlert 
+      <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
         header={'Username'}
