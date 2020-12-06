@@ -1,6 +1,6 @@
 import {Dice} from "../class/Dice";
 import {Player} from "../class/Player";
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
     IonButton,
     IonButtons,
@@ -17,11 +17,13 @@ import {
 } from '@ionic/react';
 import {ROUTE_PROFILE} from "../nav/Routes";
 import {personOutline} from "ionicons/icons";
+import AppContext from '../data/app-context';
 
 export const Plate: React.FC = () => {
     const [player] = useState<Player>(new Player("Player", false))
     const [enemy] = useState<Player>(new Player("Enemy", false))
     const dice = new Dice();
+    const appCtx = useContext(AppContext)
     player.money = 50
     enemy.money = 60
     return (
@@ -202,7 +204,7 @@ export const Plate: React.FC = () => {
                     <IonToolbar>
                         <IonButton expand="block" color="secondary" onClick={dice.roll}>Lancer les dès</IonButton>
                         <p><b>Dernier lancé:</b> {dice.result}</p>
-                        <p><b>Pseudonyme:</b> {player.name}</p>
+                        <p><b>Pseudonyme:</b> {appCtx.profile.username}</p>
                         <p><b>Mon argent:</b> {player.money}</p>
                         <p><b>Argent Adversaire:</b> {enemy.money}</p>
                     </IonToolbar>
