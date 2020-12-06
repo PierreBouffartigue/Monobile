@@ -28,6 +28,7 @@ import { CaseSpe } from "./pages/CaseSpe";
 import { ROUTE_PROFILE } from './nav/Routes';
 import Profiles from './pages/Profiles';
 import AppContext from './data/app-context';
+import {Game} from "./pages/Game";
 
 const App: React.FC = () => {
   
@@ -45,6 +46,7 @@ const App: React.FC = () => {
         <Route path={ROUTE_PROFILE} component={Profiles} />
         <Route path="/plate" component={Plate} exact={true} />
         <Route path="/player" component={PlayerTest} exact={true} />
+        <Route path="/game" component={Game} exact={true} />
         <Route path="/casespe" component={CaseSpe} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
