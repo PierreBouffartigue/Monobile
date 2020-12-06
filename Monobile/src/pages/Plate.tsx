@@ -44,11 +44,7 @@ export const Plate: React.FC = () => {
                         <IonBackButton defaultHref={(ROUTE_HOME)} />
                     </IonButtons>
                     <IonTitle>Monobile</IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton href={ROUTE_PROFILE}>
-                            <IonIcon icon={personOutline} />
-                        </IonButton>
-                    </IonButtons>
+                    
                 </IonToolbar>
             </IonHeader>
             <IonContent className="padding" color="new">
