@@ -1,36 +1,73 @@
-import React, {useState} from "react";
+import React from "react";
 import {
-    IonButton,
+    IonButton, IonApp,
     IonButtons,
     IonCol,
     IonContent,
     IonHeader,
     IonIcon,
-    IonPage, IonRow,
+    IonRow,
     IonTitle,
     IonToolbar,
-    IonGrid, IonText, IonActionSheet
+    IonGrid, IonPage,
 } from "@ionic/react";
 import {ROUTE_PROFILE} from "../nav/Routes";
 import {personOutline} from "ionicons/icons";
 
 class Plate {
     public players: Player[] = [new Player(1, "player1", false), new Player(2, "player2", false), new Player(3, "player3",false), new Player(4,"player4",false)];
-    public cards: Card[] = [new Card("pink1", "pink", 1),
-        new Card("pink2", "pink", 2),
-        new Card("pink3", "pink", 3),
-        new Card("red1", "red",4),
-        new Card("red2", "red", 5),
+    public cards: Card[] = [
+        new Card("red1", "red",2),
+        new Card("red2", "red", 3),
         new Card("red3", "red", 5),
+        new Card("red4", "red", 6),
+        new Card("green1", "green", 8),
+        new Card("green2", "green", 9),
+        new Card("green3", "green", 11),
+        new Card("green4", "green", 12),
+        new Card("blue1", "blue", 14),
+        new Card("blue2", "blue", 15),
+        new Card("blue3", "blue", 17),
+        new Card("blue4", "blue", 18),
+        new Card("yellow1", "yellow", 20),
+        new Card("yellow2", "yellow", 21),
+        new Card("yellow3", "yellow", 23),
+        new Card("yellow4", "yellow", 24),
     ];
     public playerTurn: number = 0;
+    public images: string[] = [
+        "https://cdn.discordapp.com/attachments/415509967253274635/784894301669818378/depart.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897742421753886/red.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897747542474752/red2.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784893339304067092/interrogation.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897833810657280/red3.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897736985149440/red4.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784894348641828894/jail.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897745156440064/green.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897749892071514/green2.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784893339304067092/interrogation.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897837062160414/green3.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897740219613224/green4.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784895293363454002/trophy-pngrepo-com.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897743885566033/blue.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897748591837234/blue2.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784893339304067092/interrogation.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897835492573184/blue3.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897738135437322/blue4.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784894952076869712/plane.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897746020073483/yellow.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897751296376872/yellow2.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784893339304067092/interrogation.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897838601338921/yellow3.png",
+        "https://cdn.discordapp.com/attachments/415509967253274635/784897741326385152/yellow4.png"
+    ]
 
     nextPlayer() {
         this.playerTurn++
         if (this.playerTurn > this.players.length - 1) {
             this.playerTurn = 0;
         }
-        if (this.playerTurn != 0) {
+        if (this.playerTurn !== 0) {
             if (!this.players[this.playerTurn].lost) {
                 setTimeout(() => {
                     this.players[this.playerTurn].move(this);
@@ -100,7 +137,9 @@ class Plate {
                 if (cases[i] !== -1) {
                     col.push(
                         <IonCol id={"case_"+cases[i]} className={"case_"+cases[i]}>
-                            <button><img src="changetoplateimg.png" alt={cases[i].toString()}/></button>
+                            <button className={"case_"+cases[i]}><img
+                                src={ this.images[cases[i]-1] }
+                                alt={cases[i].toString()}/></button>
                             <IonGrid>
                                 <IonRow className={"pawns case_"+cases[i]}></IonRow>
                             </IonGrid>
@@ -238,7 +277,7 @@ class Player {
                 }
                 this.pawn(document.querySelector(".pawns.case_"+this.pos))
                 // Ia
-                if (this.playerId != 1) {
+                if (this.playerId !== 1) {
                     if (dice.d1 === dice.d2) {
                         setTimeout(() => {
                             this.move(plate)
