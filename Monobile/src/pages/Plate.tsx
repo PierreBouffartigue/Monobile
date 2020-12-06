@@ -30,18 +30,29 @@ export const Plate: React.FC = () => {
     player.money = 50
     enemy.money = 60
 
-    const test = () => {
+    const visible = () => {
         let doc = document.getElementById("tabBar");
         doc!.style.visibility = "visible";
     }
 
-    window.onload = test;
+    const hidden = () => {
+        let doc = document.getElementById("tabBar");
+        doc!.style.visibility = "hidden";
+    }
+
+    window.onload = visible;
+    const text = "< Back"
     return (
         <IonApp>
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonButtons slot="start">
-                        <IonBackButton defaultHref={(ROUTE_HOME)} />
+                        <IonButton href={(ROUTE_HOME)} onClick={() => {
+                            hidden()
+                            console.log("test")
+                        }}>
+                            {text}
+                        </IonButton>
                     </IonButtons>
                     <IonTitle>Monobile</IonTitle>
                     
