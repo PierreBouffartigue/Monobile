@@ -49,7 +49,6 @@ export const Plate: React.FC = () => {
                     <IonButtons slot="start">
                         <IonButton href={(ROUTE_HOME)} onClick={() => {
                             hidden()
-                            console.log("test")
                         }}>
                             {text}
                         </IonButton>
