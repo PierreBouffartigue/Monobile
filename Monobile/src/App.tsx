@@ -25,10 +25,12 @@ import './theme/variables.css';
 import { Plate } from "./pages/Plate";
 import { PlayerTest } from "./pages/PlayerTest";
 import { CaseSpe } from "./pages/CaseSpe";
-import { ROUTE_PROFILE } from './nav/Routes';
 import Profiles from './pages/Profiles';
 import AppContext from './data/app-context';
 import {Game} from "./pages/Game";
+
+import { ROUTE_HOME, ROUTE_TABS_BASE, ROUTE_PROFILE } from './nav/Routes';
+import Tabs from './nav/Tabs';
 
 const App: React.FC = () => {
   
@@ -38,17 +40,13 @@ const App: React.FC = () => {
     appCtx.initContext();
   }, [])
 
+  
   return(
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
-        <Route path={ROUTE_PROFILE} component={Profiles} />
-        <Route path="/plate" component={Plate} exact={true} />
-        <Route path="/player" component={PlayerTest} exact={true} />
-        <Route path="/game" component={Game} exact={true} />
-        <Route path="/casespe" component={CaseSpe} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
+        <Route path={ROUTE_TABS_BASE} component={Tabs} />
+        <Redirect path="/" exact to={ROUTE_HOME} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

@@ -29,6 +29,13 @@ export const Plate: React.FC = () => {
     const appCtx = useContext(AppContext)
     player.money = 50
     enemy.money = 60
+
+    const test = () => {
+        let doc = document.getElementById("tabBar");
+        doc!.style.visibility = "visible";
+    }
+
+    window.onload = test;
     return (
         <IonApp>
             <IonHeader>
@@ -220,3 +227,5 @@ export const Plate: React.FC = () => {
         </IonApp>
     );
 }
+
+export default Plate;
