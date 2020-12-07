@@ -13,7 +13,7 @@ import {
 } from '@ionic/react';
 import React from 'react';
 import { personOutline } from 'ionicons/icons';
-import { ROUTE_GAME, ROUTE_PROFILE } from '../nav/Routes';
+import { ROUTE_PLATE, ROUTE_PROFILE } from '../nav/Routes';
 
 const Home: React.FC = () => {
     return (
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
                 </IonCard>
                 <IonFooter>
                     <IonToolbar>
-                        <IonButton size="large" expand="block" color="secondary" href={ROUTE_GAME}>
+                        <IonButton size="large" expand="block" color="secondary" href={ROUTE_PLATE}>
                             JOUER
                         </IonButton>
                     </IonToolbar>

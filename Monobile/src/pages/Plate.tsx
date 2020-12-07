@@ -370,9 +370,11 @@ export const Plate: React.FC = () => {
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonTitle>Monobile</IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton href={ROUTE_PROFILE}>
-                            <IonIcon icon={personOutline}/>
+                    <IonButtons slot="start">
+                        <IonButton href={(ROUTE_HOME)} onClick={() => {
+                            hidden()
+                        }}>
+                            {text}
                         </IonButton>
                     </IonButtons>
                 </IonToolbar>
