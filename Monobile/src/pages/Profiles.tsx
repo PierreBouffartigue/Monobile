@@ -87,9 +87,9 @@ const Profiles: React.FC = () => {
 
               <IonRow class="ion-align-items-center">
                 <IonCol>
-                <IonButton class="" onClick={win}> victoire </IonButton>
-                <IonButton class="" onClick={lose}> defaite </IonButton>
-                  <IonButton class="" onClick={reset}> reset </IonButton>
+                <IonButton onClick={win}> victoire </IonButton>
+                <IonButton onClick={lose}> defaite </IonButton>
+                  <IonButton onClick={reset}> reset </IonButton>
                 </IonCol>
 
               </IonRow>
