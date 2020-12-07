@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     IonButton, IonApp,
     IonButtons,
@@ -8,8 +8,8 @@ import {
     IonIcon,
     IonRow,
     IonTitle,
-    IonToolbar,
-    IonGrid, IonPage,
+    IonToolbar, IonBadge,
+    IonGrid, IonPage, IonAlert, IonFooter,
 } from "@ionic/react";
 import {ROUTE_PROFILE} from "../nav/Routes";
 import {personOutline} from "ionicons/icons";
@@ -62,12 +62,49 @@ class Plate {
         "https://cdn.discordapp.com/attachments/415509967253274635/784897741326385152/yellow4.png"
     ]
 
+    caseRender(cases: number[]) {
+        const col = [];
+        for (let i = 0; i < cases.length; i++) {
+            if (cases[i] === 0) {
+                col.push(<IonCol><b>Monobile</b></IonCol>);
+            }
+            else if (cases[i] !== -1) {
+                let classCol = "case_"+cases[i]
+                if (this.cards.find((x) => x.pos === cases[i])) {
+                    classCol += " card";
+                }
+                if (cases[i] === 3 || cases[i] === 9 || cases[i] === 15 || cases[i] === 21) {
+                    classCol += "luckCard"
+                }
+                col.push(
+                    <IonCol id={"case_"+cases[i]} className={classCol}>
+                        <button className={"case_"+cases[i]}><img
+                            src={ this.images[cases[i]-1] }
+                            alt={cases[i].toString()}/></button>
+                        <IonGrid>
+                            <IonRow className={"pawns case_"+cases[i]}>
+
+                            </IonRow>
+                        </IonGrid>
+                    </IonCol>
+                );
+            }
+            else {
+                col.push(<IonCol></IonCol>);
+            }
+        }
+        return col;
+    }
+
     nextPlayer() {
         this.playerTurn++
         if (this.playerTurn > this.players.length - 1) {
             this.playerTurn = 0;
         }
+        // Ia turn
         if (this.playerTurn !== 0) {
+            this.playerBtn(false, false, false);
+            // Ia action
             if (!this.players[this.playerTurn].lost) {
                 setTimeout(() => {
                     this.players[this.playerTurn].move(this);
@@ -77,139 +114,41 @@ class Plate {
                 this.nextPlayer();
             }
         }
-    }
-
-    playerButton(rollBool: boolean, detailBool: boolean, endTurnBool: boolean) {
-        const divBtn = document.getElementById("playerBtn");
-        if (divBtn) {
-            const rollBtn = document.getElementById("rollBtn");
-            if (rollBtn) { rollBtn.remove() }
-            if (rollBool) {
-                let roll = document.createElement("button");
-                roll.id = "rollBtn";
-                roll.onclick = () => {
-                    const double = this.players[this.playerTurn].move(this);
-                    if (double) {
-                        this.playerButton(true, true, false);
-                    }
-                    else if (this.players[this.playerTurn].isJailed) {
-                        this.playerButton(false, false, true);
-                    }
-                    else {
-                        this.playerButton(false, true, true);
-                    }
-                }
-                roll.textContent = "Roll";
-                divBtn.append(roll);
-            }
-
-            const detailBtn = document.getElementById("detailBtn");
-            if (detailBtn) { detailBtn.remove() }
-            if (detailBool) {
-                let detail = document.createElement("button");
-                detail.id = "detailBtn";
-                detail.onclick = () => {
-                }
-                detail.textContent = "Detail";
-                divBtn.append(detail);
-            }
-
-            const endTurnBtn = document.getElementById("endTurnBtn");
-            if (endTurnBtn) { endTurnBtn.remove() }
-            if (endTurnBool) {
-                let endTurn = document.createElement("button");
-                endTurn.id = "endTurnBtn";
-                endTurn.onclick = () => {
-                    this.players[0].doubleCount = 0;
-                    this.nextPlayer();
-                    this.playerButton(true, false, false);
-                }
-                endTurn.textContent = "End turn";
-                divBtn.append(endTurn);
-            }
+        // Player turn
+        if (this.playerTurn === 0) {
+            this.playerBtn(true, false, false);
         }
     }
 
-    render() {
-        const fun = (cases: number[]) => {
-            const col = [];
-            for (let i = 0; i < cases.length; i++) {
-                if (cases[i] !== -1) {
-                    col.push(
-                        <IonCol id={"case_"+cases[i]} className={"case_"+cases[i]}>
-                            <button className={"case_"+cases[i]}><img
-                                src={ this.images[cases[i]-1] }
-                                alt={cases[i].toString()}/></button>
-                            <IonGrid>
-                                <IonRow className={"pawns case_"+cases[i]}></IonRow>
-                            </IonGrid>
-                        </IonCol>
-                    );
-                }
-                else
-                    col.push(<IonCol></IonCol>);
-            }
-            return col;
+    playerBtn(btnRollB: boolean, btnActionsB: boolean, btnEndTurnB: boolean) {
+        const btnRoll = document.getElementById("btnRoll");
+        const btnActions = document.getElementById("btnActions");
+        const btnEndTurn = document.getElementById("btnEndTurn");
+        if (btnRoll && btnActions && btnEndTurn) {
+            if (btnRollB)
+                btnRoll.setAttribute("disabled", "false");
+            else
+                btnRoll.setAttribute("disabled", "true");
+            if (btnActionsB)
+                btnActions.setAttribute("disabled", "false");
+            else
+                btnActions.setAttribute("disabled", "true");
+            if (btnEndTurnB)
+                btnEndTurn.setAttribute("disabled", "false");
+            else
+                btnEndTurn.setAttribute("disabled", "true");
         }
-        return(
-            <div>
-                <IonGrid>
-                    <IonRow className="ion-align-items-start">
-                        { (() => {
-                            return fun([7, 8, 9, 10, 11, 12, 13]);
-                        }) ()}
-                    </IonRow>
+    }
 
-                    <IonRow className="ion-align-items-center">
-                        { (() => {
-                            return fun([6, -1, -1, -1, -1, -1, 14]);
-                        }) ()}
-                    </IonRow>
-
-                    <IonRow className="ion-align-items-center">
-                        { (() => {
-                            return fun([5, -1, -1, -1, -1, -1, 15]);
-                        }) ()}
-                    </IonRow>
-
-                    <IonRow className="ion-align-items-center">
-                        { (() => {
-                            return fun([4, -1, -1, -1, -1, -1, 16]);
-                        }) ()}
-                    </IonRow>
-
-                    <IonRow className="ion-align-items-center">
-                        { (() => {
-                            return fun([3, -1, -1, -1, -1, -1, 17]);
-                        }) ()}
-                    </IonRow>
-
-                    <IonRow className="ion-align-items-center">
-                        { (() => {
-                            return fun([2, -1, -1, -1, -1, -1, 18]);
-                        }) ()}
-                    </IonRow>
-
-                    <IonRow className="ion-align-items-end">
-                        { (() => {
-                            return fun([1, 24, 23, 22, 21, 20, 19]);
-                        }) ()}
-                    </IonRow>
-                </IonGrid>
-
-                { (() => {
-                    let playerPawn;
-                    playerPawn = document.querySelector(".pawns.case_1");
-                    for (let p = 0; p < this.players.length; p++) {
-                        if (this.players[p].pos === 1 && playerPawn) {
-                            this.players[p].pawn(playerPawn);
-                        }
-                    }
-                }) ()}
-                <div id="playerBtn"></div>
-                { (() => { this.playerButton(true, false, false) }) ()}
-            </div>
-        );
+    luckCard(player :Player) {
+        const fun1 = () => {
+            player.money += 20;
+        }
+        const fun2 = () => {
+            player.money -= 20;
+        }
+        const fun = [fun1(), fun2()]
+        return fun[Math.floor(Math.random()*fun.length)];
     }
 }
 
@@ -237,6 +176,11 @@ class Player {
     }
 
     move(plate: Plate) {
+        const btnRoll = document.getElementById("btnRoll");
+        const btnEndTurn = document.getElementById("btnEndTurn");
+        if (btnRoll) {
+            btnRoll.setAttribute("disabled", "true");
+        }
         const dice = new Dice();
         // In jail
         if (this.isJailed) {
@@ -258,54 +202,88 @@ class Player {
         else {
             const diceRoll = dice.roll()
             console.log(this.playerId+" dice="+dice.d1+"+"+dice.d2+"="+diceRoll)
+            // Double
             if (dice.d1 === dice.d2) {
                 this.doubleCount++;
-            }
-            // Go to jail
-            if (this.doubleCount === 3) {
-                this.pos = 7;
-                this.isJailed = true;
-                this.pawn(document.querySelector(".pawns.case_"+this.pos));
-                this.doubleCount = 0;
-                plate.nextPlayer();
-                return false;
-            }
-            else {
-                this.pos += diceRoll;
-                if (this.pos > 24) {
-                    this.pos -= 24;
+                // Go to jail
+                if (this.doubleCount === 3) {
+                    this.pos = 7;
+                    this.isJailed = true;
+                    this.pawn(document.querySelector(".pawns.case_"+this.pos));
+                    this.doubleCount = 0;
+                    plate.nextPlayer();
                 }
-                this.pawn(document.querySelector(".pawns.case_"+this.pos))
-                // Ia
-                if (this.playerId !== 1) {
-                    if (dice.d1 === dice.d2) {
+                else {
+                    this.pos += diceRoll;
+                    if (this.pos > 24) {
+                        this.pos -= 24;
+                        this.money += 50;
+                    }
+                    this.pawn(document.querySelector(".pawns.case_"+this.pos));
+                    // Player
+                    if (this.playerId === 1) {
+                        if (plate.cards.find(x => x.pos === this.pos)) {
+                            plate.playerBtn(true, true, false)
+                        }
+                        else {
+                            plate.playerBtn(true, false, false)
+                        }
+                    }
+                    // Ia
+                    else if (this.playerId !== 1) {
+                        //Buy
+
+                        // Ia move again
                         setTimeout(() => {
                             this.move(plate)
                         }, 2000);
                     }
+
+                }
+            }
+            else {
+                // Move
+                this.pos += diceRoll;
+                if (this.pos > 24) {
+                    this.pos -= 24;
+                    this.money += 50;
+                }
+                this.pawn(document.querySelector(".pawns.case_"+this.pos));
+                this.doubleCount = 0;
+                // Player
+                if (this.playerId === 1) {
+                    if (plate.cards.find(x => x.pos === this.pos)) {
+                        plate.playerBtn(false, true, true)
+                    }
                     else {
-                        this.doubleCount = 0;
-                        plate.nextPlayer();
+                        plate.playerBtn(false, false, true)
                     }
                 }
-                return dice.d1 === dice.d2;
+                // Ia
+                else if (this.playerId !== 1) {
+                    plate.nextPlayer();
+                }
             }
         }
     }
 
     pawn(el: Element | null) {
+        // Delete previous pawn
         const pawnDel = document.getElementById("pawn_player"+this.playerId);
         if (pawnDel) { pawnDel.remove() }
         if (el) {
-            let pawn = document.createElement("div");
+            // Create pawn
+            let pawn = document.createElement("ion-badge");
             pawn.id = "pawn_player"+this.playerId;
+            pawn.color = "dark";
             if (this.isJailed) {
                 pawn.style.color = "red";
             }
             else {
-                pawn.style.color = "black";
+                pawn.style.color = "white";
             }
             pawn.textContent = this.playerId.toString();
+            // Add pawn
             el.append(pawn);
         }
     }
@@ -360,10 +338,15 @@ class Card {
 }
 
 export const Game: React.FC = () => {
-    const plate = new Plate();
+    const [plate, setPlate] = useState<Plate>(new Plate())
+    const [showBegin, setShowBegin] = useState(true);
+    const [showCard, setShowCard] = useState(false);
+    const [showLuckCard, setShowLuckCard] = useState(false);
+    const [showTour, setShowTour] = useState(false);
+    const [change, setChange] = useState<boolean>(false);
 
     return (
-        <IonPage>
+        <IonApp>
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonTitle>Monobile</IonTitle>
@@ -375,8 +358,158 @@ export const Game: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {plate.render()}
+                <IonGrid>
+                    <IonRow className="ion-align-items-start">
+                        { (() => {
+                            return plate.caseRender([7, 8, 9, 10, 11, 12, 13]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-center">
+                        { (() => {
+                            return plate.caseRender([6, -1, -1, -1, -1, -1, 14]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-center">
+                        { (() => {
+                            return plate.caseRender([5, -1, -1, -1, -1, -1, 15]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-center">
+                        { (() => {
+                            return plate.caseRender([4, -1, -1, 0, -1, -1, 16]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-center">
+                        { (() => {
+                            return plate.caseRender([3, -1, -1, -1, -1, -1, 17]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-center">
+                        { (() => {
+                            return plate.caseRender([2, -1, -1, -1, -1, -1, 18]);
+                        }) ()}
+                    </IonRow>
+
+                    <IonRow className="ion-align-items-end">
+                        { (() => {
+                            return plate.caseRender([1, 24, 23, 22, 21, 20, 19]);
+                        }) ()}
+                    </IonRow>
+                </IonGrid>
+
+                <div id="playerBtn">
+                    { (() => {
+                        let btn = []
+                        btn.push(
+                            <IonButton id="btnRoll" onClick={() => {
+                                plate.players[0].move(plate);
+                            }}>Roll</IonButton>
+                        );
+                        btn.push(
+                            <IonButton id="btnActions" onClick={() => {
+                                setShowCard(true);
+                            }}>Actions</IonButton>
+                        )
+                        btn.push(
+                            <IonButton id="btnEndTurn" onClick={() => {
+                                plate.players[0].doubleCount = 0;
+                                plate.nextPlayer();
+                            }}>End turn</IonButton>
+                        );
+                        return btn;
+                    }) ()}
+
+                    <IonAlert
+                        isOpen={showBegin}
+                        onDidDismiss={() => setShowBegin(false)}
+                        header={'Monobile'}
+                        buttons={[
+                            {
+                                text: 'Begin',
+                                handler: () => {
+                                    plate.playerBtn(true, false, false);
+                                    for (let i = 0; i < plate.players.length; i++) {
+                                        plate.players[i].pawn(document.querySelector(".pawns.case_"+plate.players[i].pos))
+                                    }
+                                    setChange(!change)
+                                }
+                            }
+
+                        ]}
+                    />
+
+                    <IonAlert
+                        isOpen={showCard}
+                        onDidDismiss={() => setShowCard(false)}
+                        header={'Choose what to do :'}
+                        buttons={[
+                            {
+                                text: 'Buy',
+                                handler: () => {
+
+                                }
+                            },
+                            {
+                                text: 'Cancel',
+                                handler: () => {
+
+                                }
+                            }
+
+                        ]}
+                    />
+
+                    <IonAlert
+                        isOpen={showTour}
+                        onDidDismiss={() => setShowTour(false)}
+                        header={'Where do you go ?'}
+                        inputs={[
+                            {
+                                name: 'pos',
+                                type: 'number',
+                                min: 1,
+                                max: 24,
+                                placeholder: '19'
+                            }
+                        ]}
+                        buttons={[
+                            {
+                                text: 'Go',
+                                handler: data => {
+                                    if (parseInt(data.pos) < 19) {
+                                        plate.players[0].money += 50
+                                    }
+                                    plate.players[0].pos = parseInt(data.pos)
+                                    plate.players[0].pawn(document.querySelector(".pawns.case_"+plate.players[0].pos));
+                                }
+                            },
+                            {
+                                text: 'Cancel',
+                                role: 'cancel',
+                                handler: () => {
+                                }
+                            }
+
+
+                        ]}
+                    />
+
+                </div>
+                <IonFooter>
+                    <IonToolbar>
+                        <p><b>Pseudonyme:</b> Player1</p>
+                        <p><b>Mon argent:</b> {plate.players[0].money}</p>
+                        <p><b>Argent Player2:</b> {plate.players[1].money}</p>
+                        <p><b>Argent Player3:</b> {plate.players[2].money}</p>
+                        <p><b>Argent Player4:</b> {plate.players[3].money}</p>
+                    </IonToolbar>
+                </IonFooter>
             </IonContent>
-        </IonPage>
+        </IonApp>
     )
 }
