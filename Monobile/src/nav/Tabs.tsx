@@ -14,12 +14,14 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profiles';
 import GameProfiles from '../pages/GameProfiles';
 import Plate from '../pages/Plate';
-import { ROUTE_HOME, ROUTE_TABS_BASE, ROUTE_PROFILE, ROUTE_PLATE, ROUTE_GAMEPROFILES } from './Routes';
+import Game from '../pages/Game';
+import { ROUTE_HOME, ROUTE_TABS_BASE, ROUTE_PROFILE, ROUTE_PLATE, ROUTE_GAMEPROFILES, ROUTE_GAME } from './Routes';
 
 const Tabs: React.FC = () => (
     <IonTabs >
         <IonRouterOutlet>
             <Route path={ROUTE_HOME} component={Home} exact />
+            <Route path={ROUTE_GAME} component={Game} exact />
             <Route path={ROUTE_PLATE} component={Plate} exact />
             <Route path={ROUTE_GAMEPROFILES} component={GameProfiles} exact />
             <Route path={ROUTE_PROFILE} component={Profile} exact />

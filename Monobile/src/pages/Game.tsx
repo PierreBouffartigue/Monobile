@@ -513,3 +513,4 @@ export const Game: React.FC = () => {
         </IonApp>
     )
 }
+export default Game;
