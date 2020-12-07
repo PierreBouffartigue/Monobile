@@ -380,3 +380,4 @@ export const Game: React.FC = () => {
         </IonPage>
     )
 }
+export default Game;
