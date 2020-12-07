@@ -13,6 +13,7 @@ import {
 } from "@ionic/react";
 import {ROUTE_PROFILE} from "../nav/Routes";
 import {personOutline} from "ionicons/icons";
+import { ROUTE_HOME } from '../nav/Routes'
 
 class Plate {
     public players: Player[] = [new Player(1, "player1", false), new Player(2, "player2", false), new Player(3, "player3",false), new Player(4,"player4",false)];
@@ -345,16 +346,31 @@ export const Game: React.FC = () => {
     const [showTour, setShowTour] = useState(false);
     const [change, setChange] = useState<boolean>(false);
 
+    const visible = () => {
+        let doc = document.getElementById("tabBar");
+        doc!.style.visibility = "visible";
+    }
+
+    const hidden = () => {
+        let doc = document.getElementById("tabBar");
+        doc!.style.visibility = "hidden";
+    }
+
+    window.onload = visible;
+    const text = "< Back"
+
     return (
         <IonApp>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle>Monobile</IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton href={ROUTE_PROFILE}>
-                            <IonIcon icon={personOutline}/>
+                <IonButtons slot="start">
+                        <IonButton href={(ROUTE_HOME)} onClick={() => {
+                            hidden()
+                        }}>
+                            {text}
                         </IonButton>
                     </IonButtons>
+                    <IonTitle>Monobile</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
